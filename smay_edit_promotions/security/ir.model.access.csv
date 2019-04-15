@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_smay_edit_promotions_smay_edit_promotions,smay_edit_promotions.smay_edit_promotions,model_smay_edit_promotions_smay_edit_promotions,,1,0,0,0

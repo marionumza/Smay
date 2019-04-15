@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="pos_promo_form_view" model="ir.ui.view">
+        <field name="name">pos.promo.form.view</field>
+        <field name="model">pos.promo</field>
+        <field name="inherit_id" ref="pos_promo.pos_promo_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="replace">
+                <notebook>
+                    <page string="Margin" attrs="{'invisible':[('average_marg','==', 0.00)]}">
+                        <field name="margin_lines" readonly="False" options="{'no_open': True}">
+                            <tree editable="bottom" colors="red:state in ['e0','e1'];green:state == 'v'">
+                                <field name="code" readonly="True"/>
+                                <field name="name" readonly="True" options="{'no_open': True}"/>
+                                <field name="lst_price" readonly="True"/>
+                                <field name="prm_price" readonly="False"/>
+                                <field name="cst_price" readonly="True"/>
+                                <field name="mrg_price" readonly="True"/>
+                                <field name="mrg_perce" readonly="True"/>
+                                <!--<field name="mrg_perce" string="" widget="progressbar"/>-->
+                                <field name="state" readonly="True"/>
+                            </tree>
+                            <form>
+                                <sheet>
+                                    <group col="4" colspan="4">
+                                        <field name="code"/>
+                                        <field name="name"/>
+                                        <field name="lst_price"/>
+                                        <field name="prm_price"/>
+                                        <field name="cst_price"/>
+                                        <field name="mrg_price"/>
+                                        <field name="mrg_perce"/>
+                                    </group>
+                                </sheet>
+                            </form>
+                        </field>
+                        <group col="2" colspan="2">
+                            <field name="average_marg" readonly="True"/>
+                            <field name="avr_marg_per" readonly="True"/>
+                        </group>
+                    </page>
+                    <page string="Config">
+                        <group col="2" colspan="2">
+                            <field name="single_product_id" attrs="{'invisible':[('type','!=', 'producto')]}">
+                                <tree>
+                                    <field name="barcode"/>
+                                    <field name="name"/>
+                                    <field name="lst_price"/>
+                                    <field name="standard_price"/>
+                                    <field name="default_code"/>
+                                </tree>
+                            </field>
+                            <field name="combo_product_ids" attrs="{'invisible':[('type','!=', 'combo')]}">
+                                <tree>
+                                    <field name="barcode"/>
+                                    <field name="name"/>
+                                    <field name="lst_price"/>
+                                    <field name="standard_price"/>
+                                    <field name="default_code"/>
+                                </tree>
+                            </field>
+                            <field name="product_except_ids" attrs="{'invisible':[('type','!=', 'todo')]}"/>
+                            <field name="categ_id" attrs="{'invisible':[('type','!=', 'category')]}"/>
+                            <field name="mark_id" attrs="{'invisible':[('type','!=', 'marca')]}"/>
+                            <field name="from_qty" attrs="{'invisible':[('type2','!=', 'cantidad')]}"/>
+                            <field name="from_price" attrs="{'invisible':[('type2','!=', 'precio')]}"/>
+                            <field name="percent" attrs="{'invisible':[('calculate','!=', 'porcentaje')]}"/>
+                            <field name="price" attrs="{'invisible':[('calculate','!=', 'precio')]}"/>
+                        </group>
+                    </page>
+                </notebook>
+            </xpath>
+        </field>
+    </record>
+</odoo>
