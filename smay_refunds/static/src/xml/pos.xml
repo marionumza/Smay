@@ -1,80 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates id="template" xml:space="preserve">
-	<t t-extend="OrderSelectorWidget">
-        <t t-jquery="div.order-selector" t-operation="append">
-            <div style="position: absolute;right: 118px; border-left: 1px solid #292929;">
-                <span class="header-button smay_menu">
-                    <i class="fa fa-bars" aria-hidden="true" style="font-size: 14px;"></i>
-                </span>
+    <t t-extend="PopUpMenu">
+        <t t-jquery=".gridView" t-operation="append">
+            <div class="gridView-listItem">
+                <div class="gridView-detailsSection">
+                    <div class="gridView-toolbar refundButton">
+                        <div class="gridView-menu"><i class="fa fa-rotate-left"></i></div>
+                        <div class="gridView-date">Devolución</div>
+                    </div>
+                </div>
             </div>
         </t>
     </t>
 
 
-    <t t-name="PopUpMenu">
-		<div class="modal-dialog" > <!--id="sunny-test">-->
-			<div class="content">
-				<h2><t t-esc=" widget.options.title || 'Menu - Super May' " /></h2>
-                <div class="gridView contain">
-
-					<div class="gridView-listItem">
-						<div class="gridView-detailsSection">
-							<div class="gridView-toolbar reprintButton">
-								<div class="gridView-menu"><i class="fa fa-print"></i></div>
-                                <div class="gridView-date">Reimpresión de Ticket</div>
-							</div>
-						</div>
-					</div>
-				</div>
-                <div class="footer">
-					<div class="button close">
-						Salir
-					</div>
-				</div>
-			</div>
-		</div>
-	</t>
-
-    <t t-name="ReprintTicketPopUp">
-		<div class="modal-dialog">
+    <t t-name="RefundPopUp">
+        <div class="modal-dialog">
 			<div class="popup popup-confirm" style="height:350px !import">
 				<p class="title">
-					<t t-esc="widget.options.title || 'Reimpresión de Ticket' "/>
+					<t t-esc="widget.options.title || 'Devolucion' "/>
 				</p>
                 <br/>
                 <br/>
                 <div style='text-align:center'>
-					Selecciona el ticket a reimprimir :
+					Escribe la orden a devolver :
 				</div>
                 <br/>
                 <p class="message">
-					<select id="tickets">
-					</select>
+					<input id="refund_order" type="text"/>
+                    <br/>
+                    <br/>
+                    <br/>
 				</p>
                 <div class="footer">
-                    <div class="button" id="accept">
+                    <div class="button" id="refund_accept">
 						Aceptar
 					</div>
-                    <div class="button" id="cancel">
+                    <div class="button" id="refund_cancel">
 						Cancelar
 					</div>
 				</div>
 			</div>
 		</div>
-	</t>
+    </t>
 
 
-    <t t-name="ReprintPosTicket">
+    <t t-name="RefundOrderInformationPopUp">
+        <div class="modal-dialog">
+            <div class="popup popup-confirm" style="height:500px !important">
+                <p class="title"><t t-esc=" widget.options.title || 'Devolución - Productos que se devolceran' " /></p>
+                <p id='original_order' align="left"></p>
+                <div class="footer">
+                <div class="button" style='width:126px;' id="OriginalOrderAccept">
+                        Aceptar
+                    </div>
+                    <div class="button" style='width:126px;' id="OriginalOrderCancel">
+                        Cancelar
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </t>
+
+
+    <t t-name="RefoundPosTicket">
         <!---HEAD-->
         <br/>
         <div class="pos-center-align" style="font-weight: bold; background-color: black;color:white;padding:5px 0px">
-                --- REIMPRESIÓN DE TICKET ---
+                --- DEVOLUCIÓN ---
         </div>
         <br/>
-
-        <div class="pos-center-align">
-           Fecha de Reimpresión: <t t-esc="receipt.date_reprint"/>
-        </div>
 
 
         <div class="pos-center-align">
@@ -110,7 +106,8 @@
 
         <!-- BODY -->
         <div class="pos-center-align">
-            <t t-esc="receipt.date_order"/>
+            <!--<t t-esc="receipt.date_order"/>-->
+            <t t-esc="receipt.date_reprint"/>
             <t t-esc="receipt.order_name"/>
         </div>
         <br/>
@@ -263,13 +260,14 @@
         <br/>
         <br/>
         <div class="pos-center-align" style="font-weight: bold; background-color: black;color:white;padding:5px 0px">
-                --- REIMPRESIÓN DE TICKET ---
+                --- DEVOLUCIÓN ---
         </div>
         <br/>
         <t t-js="_context">
             setTimeout(function(){
-                $('#barcode_ticket').attr('src','/report/barcode/Code128/'+_context.receipt.order_name);
-            },200);
+                $('#barcode_ticket').attr('src','/report/barcode/Code128/'+_context.receipt.order_name)
+            },150);
+
         </t>
     </t>
 </templates>

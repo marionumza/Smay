@@ -80,7 +80,7 @@ odoo.define('smay_pos_invoice.smay_pos_invoice', function (require) {
         show: function(options){
             this._super(options);
             var order = self.posmodel.get_order();
-            self.$('#accept').on('click', function() {
+            self.$('#accept14').on('click', function() {
                     order.set_uso_cfdi($('#uso_cfdi').children('option:selected').val());
                     order.set_pay_method($('#metodo_pago').children('option:selected').val());
                     order.set_forma_pago($('#forma_pago').children('option:selected').val());
@@ -90,7 +90,7 @@ odoo.define('smay_pos_invoice.smay_pos_invoice', function (require) {
                     }
                 });
 
-            self.$('#cancel').on('click', function() {
+            self.$('#cancel14').on('click', function() {
                     order.set_uso_cfdi(1);
                     order.set_pay_method(1);
                     order.set_forma_pago(1);

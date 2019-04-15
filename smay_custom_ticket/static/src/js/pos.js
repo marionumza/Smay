@@ -8,6 +8,39 @@ odoo.define('smay_custom_ticket.smay_custom_ticket', function(require){
 	'country_id','state_id','invoice_partner_id'])
 
 
+	screens.ReceiptScreenWidget.include({
+		show: function()
+		{
+			this.pos.config.iface_print_auto  = false
+			this._super();
+			var self = this;
+			this.render_change();
+			this.render_receipt();
+			this.lock_screen(false);
+			if(!self.pos.gui.get_current_screen_param('reprint') &&
+			!self.pos.gui.get_current_screen_param('refund') &&
+			!self.pos.gui.get_current_screen_param('retirement'))
+			    self.render_barcode_ticket(self.pos.get_order().name);
+			this.pos.config.iface_print_auto = true
+			//self.handle_auto_print();
+
+			setTimeout(function(){
+			        if(!self.pos.gui.get_current_screen_param('reprint') &&
+                        !self.pos.gui.get_current_screen_param('refund') &&
+                        !self.pos.gui.get_current_screen_param('retirement'))
+			                self.render_barcode_ticket(self.pos.get_order().name);
+
+			        self.handle_auto_print();
+			        },500);
+
+		},
+
+	    render_barcode_ticket: function(pos_reference){
+	        $('.barcode_ticket').attr('src','/report/barcode/Code128/'+pos_reference)
+	        $('#barcode_ticket').attr('src','/report/barcode/Code128/'+pos_reference)
+	    },
+	});
+
 
 	var _super_order = models.Order;
 	models.Order = models.Order.extend({

@@ -44,25 +44,14 @@ class SmayReprintTicketPosOrder(models.Model):
             qty_products = qty_products + orderline.qty
             _order_line = dict()
             _order_line['name_product'] = orderline.product_id.name
+            _order_line['product_id'] = orderline.product_id.id
             _order_line['qty'] = orderline.qty
             _order_line['price_unit'] = orderline.price_unit
             _order_line['discount'] = orderline.discount
+
             for tax in orderline.tax_ids:
-                # _logger.warning('IMPUESTOOOOOOOO')
-                # _logger.warning(tax)
                 if tax.amount > 0:
                     subtotal = subtotal + (orderline.price_unit * orderline.qty) / ((tax.amount / 100) + 1)
-                    # _logger.warning(a)
-                    ####
-                    # if not taxes.get(tax.name):
-                    #    taxes[tax.name] = (orderline.price_unit * orderline.qty) - (
-                    #            orderline.price_unit * orderline.qty) / ((tax.amount / 100) + 1)
-                    # else:
-                    #    taxes.update({tax.name: taxes.get(tax.name) + (
-                    #            orderline.price_unit * orderline.qty - (orderline.price_unit * orderline.qty) / ((
-                    #                                                                                                     tax.amount / 100) + 1))})  # [tax.id] = taxes[tax.amount] #+ (((tax.amount/100)+1)*orderline.price_unit)
-                    # _logger.warning('ITERACION')
-                    # _logger.warning(tax.id)
                     if not taxes.get(tax.id):
                         taxes[tax.id] = (orderline.price_unit * orderline.qty) - (
                                 orderline.price_unit * orderline.qty) / ((tax.amount / 100) + 1)
@@ -82,13 +71,6 @@ class SmayReprintTicketPosOrder(models.Model):
                 _payment['amount'] = statement.amount
                 # _payment[statement.journal_id.name] = statement.amount
                 payments.append(_payment)
-
-        _logger.warning('Total de TAXES')
-        _logger.warning(taxes)
-        _logger.warning('SUBTOTAL')
-        _logger.warning(subtotal)
-        _logger.warning('PAYMENTSSSSSS')
-        _logger.warning(payments)
         ticket_to_reprint['orderlines'] = _order_lines
         ticket_to_reprint['subtotal'] = subtotal
         ticket_to_reprint['taxes'] = taxes

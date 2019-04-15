@@ -81,25 +81,33 @@ class SmayPosInvoicePosOrder(models.Model):
             inv = invoice._convert_to_write({name: invoice[name] for name in invoice._cache})
             # assigning parameters for the invoicing
             temp_order = self.env['pos.order'].search([('name', '=', inv.get('name'))], order='create_date', limit=1)
-            amount_temp_payment = 0
+            #amount_temp_payment = 0
             method_ids = []
             # reviews main payment(payment with most amount) for that It will send to inovice
+            if order.uso_cfdi_id.id and order.pay_method_id and order.forma_pago_id:
+                inv['uso_cfdi_id'] = order.uso_cfdi_id.id  # 1
+                inv['metodo_pago_id'] = order.pay_method_id.id
+                method_ids.append(int(order.forma_pago_id.id))
+                _arguments = 6, 0, method_ids
 
-            inv['uso_cfdi_id'] = order.uso_cfdi_id.id  # 1
-            inv['metodo_pago_id'] = order.pay_method_id.id
+                # Assigns payment method (cash, card)
+                inv['pay_method_ids'] = list(tuple(_arguments))
+                inv['pay_method_ids'] = [tuple(inv['pay_method_ids'])]
 
-            for metodo in temp_order.statement_ids:
-                if metodo.amount > 0 and metodo.amount >= amount_temp_payment:
-                    amount_temp_payment = metodo.amount
-            method_ids.append(int(order.forma_pago_id.id))
-            _arguments = 6, 0, method_ids
+            #for metodo in temp_order.statement_ids:
+            #    if metodo.amount > 0 and metodo.amount >= amount_temp_payment:
+            #        amount_temp_payment = metodo.amount
+            #        #id_temp_payment = int(metodo.journal_id.pay_method_id.code)
+
+            #method_ids.append(int(order.forma_pago_id.id))
+            #_arguments = 6, 0, method_ids
 
             # Assigns payment method (cash, card)
-            inv['pay_method_ids'] = list(tuple(_arguments))
-            inv['pay_method_ids'] = [tuple(inv['pay_method_ids'])]
+            #inv['pay_method_ids'] = list(tuple(_arguments))
+            #inv['pay_method_ids'] = [tuple(inv['pay_method_ids'])]
 
             # Selects the use that client will do with the invoice  default: [ PUE ] Pago en una sola exhibición
-            used_cfdi = self.env['sat.uso.cfdi'].search([('name', '=', 'Adquisición de mercancias')])
+            #used_cfdi = self.env['sat.uso.cfdi'].search([('name', '=', 'Adquisición de mercancias')])
             new_invoice = Invoice.with_context(local_context).sudo().create(inv)
             message = _(
                 "This invoice has been created from the point of sale session: <a href=# data-oe-model=pos.order data-oe-id=%d>%s</a>") % (

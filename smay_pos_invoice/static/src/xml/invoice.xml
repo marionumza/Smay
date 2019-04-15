@@ -51,10 +51,10 @@
                 </table>
 
                 <div class="footer">
-                    <div class="button" style='width:126px;' id="accept">
+                    <div class="button" style='width:126px;' id="accept14">
                             Aceptar
                     </div>
-                    <div class="button" style='width:126px;' id="cancel">
+                    <div class="button" style='width:126px;' id="cancel14">
                             Cancelar
                     </div>
                 </div>

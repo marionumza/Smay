@@ -38,7 +38,7 @@ class GlobalInvoiceWizard(models.TransientModel):
         orders = self.env['pos.order'].search(
             [('date_order', '>=', self.start_date), ('date_order', '<=', self.end_date),
              ('company_id', '=', self.company_id.id), ('state', '=', 'paid'),
-             ('partner_id', '=', client_global_invoice.id)], order='id asc')
+             ('partner_id', '=', client_global_invoice.id),('is_refund','=',False)], order='id asc')
 
         orders = orders.filtered(lambda l: l.amount_total > 0)
 
