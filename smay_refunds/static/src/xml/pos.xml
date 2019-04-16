@@ -27,7 +27,7 @@
 				</div>
                 <br/>
                 <p class="message">
-					<input id="refund_order" type="text"/>
+					<input id="refund_order" type="text" autocomplete="off"/>
                     <br/>
                     <br/>
                     <br/>
