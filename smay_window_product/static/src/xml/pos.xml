@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="InformationProductPopUp">
+		<div class="modal-dialog">
+			<div class="popup popup-confirm" style="height:350px !import">
+				<p class="title">
+					<t t-esc="widget.options.title || 'Información del producto' "/>
+				</p>
+
+                <br/>
+                <br/>
+                <div style='display: table;
+  	width: 100%;'>
+					<div style='display: table;
+  	width: 50%;'>
+                        <img src="http://192.168.5.216:8069/web/image?model=product.product&amp;field=image_medium&amp;id=3662"/>
+                    </div>
+					<div style='display: table;
+  	width: 50%;'>
+					<div >
+						<p>
+							Precio por caja
+						</p>
+						<p>
+							$venga
+						</p>
+					</div>
+					<div >
+						<p>
+							Precio por unidad
+						</p>
+						<p>
+							$venga
+						</p>
+					</div>
+					<div >
+						<p>
+							Piezas por caja
+						</p>
+						<p>
+							$venga
+						</p>
+					</div>
+					<div >
+						<p>
+							existencias
+						</p>
+						<p>
+							$venga
+						</p>
+					</div>
+						</div>
+				</div>
+                <br/>
+                <div class="footer">
+                    <div class="button" id="accept">
+						Aceptar
+					</div>
+                    <div class="button" id="cancel">
+						Cancelar
+					</div>
+				</div>
+			</div>
+		</div>
+	</t>
+</templates>
