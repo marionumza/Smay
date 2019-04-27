@@ -7,6 +7,8 @@ odoo.define('smay_reprint_ticket.smay_reprint_ticket', function(require){
     var Model = require('web.DataModel');
     var core = require('web.core');
     var QWeb = core.qweb;
+	
+	
 
 
     chrome.OrderSelectorWidget.include({
