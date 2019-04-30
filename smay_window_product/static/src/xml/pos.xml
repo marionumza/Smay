@@ -3,62 +3,63 @@
 
     <t t-name="InformationProductPopUp">
 		<div class="modal-dialog">
-			<div class="popup popup-confirm" style="height:350px !import">
+			<div class="popup popup-confirm" style="height:350px !import; width:50%">
 				<p class="title">
 					<t t-esc="widget.options.title || 'Información del producto' "/>
 				</p>
+                <table class="mainTable">
+					<tr>
+						<td class="imgProduct">
+                            <!--<img src="http://192.168.5.216:8069/web/image?model=product.product&amp;field=image_medium&amp;id=3671"
+                                 class="imgProduct2"/>-->
+							<img t-att-src="widget.options.url_image" class="imgProduct2"/>
 
-                <br/>
-                <br/>
-                <div style='display: table;
-  	width: 100%;'>
-					<div style='display: table;
-  	width: 50%;'>
-                        <img src="http://192.168.5.216:8069/web/image?model=product.product&amp;field=image_medium&amp;id=3662"/>
-                    </div>
-					<div style='display: table;
-  	width: 50%;'>
-					<div >
-						<p>
-							Precio por caja
-						</p>
-						<p>
-							$venga
-						</p>
-					</div>
-					<div >
-						<p>
-							Precio por unidad
-						</p>
-						<p>
-							$venga
-						</p>
-					</div>
-					<div >
-						<p>
-							Piezas por caja
-						</p>
-						<p>
-							$venga
-						</p>
-					</div>
-					<div >
-						<p>
-							existencias
-						</p>
-						<p>
-							$venga
-						</p>
-					</div>
-						</div>
-				</div>
+						</td>
+						<!--<img t-att-src="options.url_image"/>-->
+
+                        <td>
+							<div class="mainPricesProduct">
+								<div class="priceProduct">
+									<p class="informationProduct">
+										Precio por Unidad
+									</p>
+                                    <p class="informationProduct">
+										$100.00
+									</p>
+								</div>
+                                <div class="priceProduct">
+								<p class="informationProduct">
+									Precio por Caja
+								</p>
+                                    <p class="informationProduct">
+									$10
+								</p>
+							</div>
+                                <div class="priceProduct">
+								<p class="informationProduct">
+									Piezas por Caja
+								</p>
+                                    <p class="informationProduct">
+									$10
+								</p>
+							</div>
+                                <div class="priceProduct">
+								<p class="informationProduct">
+									Existencias
+								</p>
+                                    <p class="informationProduct">
+									$10
+								</p>
+							</div>
+							</div>
+						</td>
+
+					</tr>
+				</table>
                 <br/>
                 <div class="footer">
-                    <div class="button" id="accept">
-						Aceptar
-					</div>
                     <div class="button" id="cancel">
-						Cancelar
+						Cerrar
 					</div>
 				</div>
 			</div>
