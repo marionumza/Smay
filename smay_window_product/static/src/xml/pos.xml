@@ -18,38 +18,48 @@
 						<!--<img t-att-src="options.url_image"/>-->
 
                         <td>
-							<div class="mainPricesProduct">
-								<div class="priceProduct">
+							<div class="mainPricesProductUnit">
+								<div class="priceProductUnit" t-att-product_id="widget.options.id" >
+								<!--<div class="priceProduct" product_id="widget.options.id" price_type="unit">-->
 									<p class="informationProduct">
 										Precio por Unidad
 									</p>
-                                    <p class="informationProduct">
-										$100.00
+                                    <p class="informationProduct2" id="informationPriceUnit">
+										$ <t t-esc="widget.options.price_per_unit"/>
 									</p>
 								</div>
-                                <div class="priceProduct">
-								<p class="informationProduct">
+								<div class="priceProductBox" t-att-product_id="widget.options.id" >
+                                <!--<div class="priceProduct">-->
+								<p class="informationProduct" >
 									Precio por Caja
 								</p>
-                                    <p class="informationProduct">
-									$10
+                                    <p class="informationProduct2" id="informationPriceBox">
+									$ <t t-esc="widget.options.price_per_box"/>
 								</p>
 							</div>
                                 <div class="priceProduct">
 								<p class="informationProduct">
 									Piezas por Caja
 								</p>
-                                    <p class="informationProduct">
-									$10
+                                    <p class="informationProduct2" id="informationQtyBox">
+									<t t-esc="widget.options.qty_per_box"/>
 								</p>
 							</div>
                                 <div class="priceProduct">
-								<p class="informationProduct">
+								<!--<p class="informationProduct">
 									Existencias
 								</p>
-                                    <p class="informationProduct">
-									$10
-								</p>
+                                    <p class="informationProduct2" id="informationQtyStock">
+										<t t-esc="widget.options.stock_qty"/>
+
+								</p>-->
+									<div class="informationProduct">
+									Existencias
+								</div>
+                                    <div class="informationProduct2" id="informationQtyStock">
+										<t t-esc="widget.options.stock_qty"/>
+
+								</div>
 							</div>
 							</div>
 						</td>
